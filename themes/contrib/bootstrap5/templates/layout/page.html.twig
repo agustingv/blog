@@ -106,6 +106,9 @@ set footer_classes = ' ' ~
           {{ page.sidebar_first }}
         </div>
       {% endif %}
+      {% if page.content_header %}
+        {{ page.content_header }}
+      {% endif %}
       <div class="order-1 order-lg-2 {{ content_classes }}">
         {{ page.content }}
       </div>
@@ -120,9 +123,35 @@ set footer_classes = ' ' ~
 </main>
 
 {% if page.footer %}
-<footer class="mt-auto {{ footer_classes }}">
-  <div class="{{ b5_top_container }}">
-    {{ page.footer }}
+<footer class="footer">
+  <div class="row primary">
+    <div class="column about">
+      <h3>Grouñidos en la red</h3>
+      <p>Desde el momento en que cogí su libro me caí al suelo rodando de risa. Algún día espero leerlo.</p>
+    </div>
+    <div class="column links">  
+      <h3>Información sobre el sitio</h3>
+      <ul>
+        <li><a href="/cookies">Política de cookies</a></li>
+        <li><a href="#terms-of-services">Terms Of Service</a></li>
+      </ul>
+    </div>
+    <div class="column subscribe">
+      <h3>Newsletter</h3>
+        <div>
+          <input type="email" placeholder="Your email id here" />
+          <button>Subscribe</button>
+        </div>
+    </div>
+  </div>
+  <div class="row copyright">
+    <div class="footer-menu">
+      <a href="">Inicio</a>
+      <a href="">About</a>
+      <a href="">Contact</a>
+    </div>
+    <p>Copyright &copy; 2023 Grouñidos en la red</p>
   </div>
 </footer>
+
 {% endif %}
