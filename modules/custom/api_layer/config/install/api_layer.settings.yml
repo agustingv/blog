@@ -1,0 +1,9 @@
+sources:
+  mediastack:
+    base_uri: http://api.mediastack.com/v1/news
+    params: 'languages=es&keywords=tecnology&access_key=29d3beb614788b5cef5f330acf61767a'
+    start: 'data'
+  newsapi:
+    base_uri: https://newsapi.org/v2/everything
+    params: 'q=tecnology&language=es&apiKey=dfddf0dcad864c7c8c61a636b4e9f594'
+    start: 'articles'

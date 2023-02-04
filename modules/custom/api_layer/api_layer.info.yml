@@ -1,0 +1,4 @@
+name : 'Api Layer'
+description : 'Connect to api layer system and get contents.'
+core_version_requirement: ^9.3 || ^10
+type: module

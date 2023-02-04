@@ -28,6 +28,27 @@
     color: darkslategray;
 }
 
+.node--view-mode-listado-a .field--name-field-source {
+  font-family: Lato;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.node--view-mode-listado-a {
+  margin-top: 20px;
+}
+
+.region-content {
+  margin-bottom: 30px;
+}
+
+.region-sidebar-second .block {
+  margin-bottom: 20px;
+}
+.region-sidebar-second h2 {
+  font-size: 1.4rem;
+  border-bottom: 1px solid darkgray;
+}
 
 article blockquote {
     padding: 60px 80px 40px;
@@ -372,12 +393,12 @@ ul.breadcrumb {
 
   .node--view-mode-listado-b h3 {
     font-family: Lato;
-    font-weight: bold;
     font-size: 1.1em;
   }
 
   .node--view-mode-listado-b h3 a {
     text-decoration: none;
+    color: lightslategray;
   }
 
   main {
@@ -398,4 +419,11 @@ ul.breadcrumb {
 
   .pagination .active  a{
     color: white !important;
+  }
+
+  .maintenance-page .site-name {
+    font-family: Lato;
+    text-decoration: none;
+    font-weight: bold;
+    color: darkslategray;
   }

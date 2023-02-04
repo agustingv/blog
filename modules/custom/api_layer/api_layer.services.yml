@@ -1,0 +1,4 @@
+services:
+  api_layer.http_client:
+    class: Drupal\api_layer\HttpClient
+    arguments: ['@http_client', '@cache.default']
