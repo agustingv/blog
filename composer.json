@@ -23,6 +23,7 @@
         "drupal/core-vendor-hardening": "^10.0",
         "drupal/devel": "^5.1",
         "drupal/eu_cookie_compliance": "^1.24",
+        "drupal/google_analytics": "^4.0",
         "drupal/pathauto": "^1.11",
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/url_embed": "^2.0@alpha",

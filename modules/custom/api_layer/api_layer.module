@@ -16,14 +16,24 @@ function api_layer_cron() {
         {
             $url = $api['base_uri'].'?'.$api['params'];
             $resource = \Drupal::service('api_layer.http_client')->get($url);
+
             if (!empty($resource)) {
                 foreach ($resource[$api['start']] as $item)
                 {
-                    $job = [
-                        'item' => $item,
-                        'source' => $source
-                    ];
-                    Drupal::queue('api_layer_news')->createItem($job);
+                    $hash = md5($item['title']);
+                    $query = \Drupal::entityQuery('node')
+                    ->condition('type', 'external')
+                    ->condition('field_hash', $hash)
+                    ->accessCheck(TRUE);
+                    $results = $query->execute();
+                    if (empty($results)) 
+                    {
+                        $job = [
+                            'item' => $item,
+                            'source' => $source
+                        ];
+                        Drupal::queue('api_layer_news')->createItem($job);
+                    }
                 }
             }
 
@@ -45,6 +55,8 @@ function api_layer_mediastack_to_entity(array $item) : void
         $fileRepository = \Drupal::service('file.repository');
         $file = $fileRepository->writeData($image, $destination,FileSystemInterface::EXISTS_REPLACE);
 
+        $hash = md5($item['title']);
+
         $node = Node::create([
             'type' => 'external',
             'title' => $item['title'],
@@ -57,6 +69,7 @@ function api_layer_mediastack_to_entity(array $item) : void
             ],
             'field_source' => $item['source'],
             'field_categoria' => ['target_id' => 2],
+            'field_hash' => $hash
         ]);
         $node->setOwnerId(3);
         $node->save();
@@ -75,6 +88,8 @@ function api_layer_newsapi_to_entity(array $item) : void
         $fileRepository = \Drupal::service('file.repository');
         $file = $fileRepository->writeData($image, $destination,FileSystemInterface::EXISTS_REPLACE);
 
+        $hash = md5($item['title']);
+
         $node = Node::create([
             'type' => 'external',
             'title' => $item['title'],
@@ -87,6 +102,7 @@ function api_layer_newsapi_to_entity(array $item) : void
             ],
             'field_source' => $item['source']['name'],
             'field_categoria' => ['target_id' => 2],
+            'field_hash' => $hash
         ]);
         $node->setOwnerId(3);
         $node->save();   
