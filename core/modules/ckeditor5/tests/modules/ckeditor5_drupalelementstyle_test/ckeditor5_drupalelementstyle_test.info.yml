@@ -5,8 +5,3 @@ package: Testing
 dependencies:
   - drupal:ckeditor5
   - drupal:media
-
-# Information added by Drupal.org packaging script on 2023-01-18
-version: '10.0.2'
-project: 'drupal'
-datestamp: 1674065604

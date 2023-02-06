@@ -2,7 +2,7 @@ name: Umami
 type: theme
 base theme: false
 description: 'The theme used for the Umami food magazine demonstration site.'
-# version: VERSION
+version: VERSION
 libraries:
   - umami/classy.base
   - core/normalize
@@ -62,8 +62,3 @@ regions:
   bottom: Bottom
   page_top: 'Page top' # Needed by Drupal Core
   page_bottom: 'Page bottom' # Needed by Drupal Core
-
-# Information added by Drupal.org packaging script on 2023-01-18
-version: '10.0.2'
-project: 'drupal'
-datestamp: 1674065604
