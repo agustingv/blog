@@ -118,6 +118,8 @@ global-styling:
       css/font-awesome/css/font-awesome.min.css: {}
       https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic: { external: true }
       https://fonts.googleapis.com/css?family=Arvo:400,700: { external: true }
+  js:
+    https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9785748532076077: { external: true }
 
 drupal.nav-tabs:
   version: '5.2.3'
