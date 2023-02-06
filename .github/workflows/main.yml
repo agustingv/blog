@@ -11,6 +11,8 @@ jobs:
         OVH_HOSTING_USER: ${{ secrets.OVH_HOSTING_USER }}
         OVH_HOSTING_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
         OVH_HOSTING_DOMAIN: ssh.cluster031.hosting.ovh.net
-        REPOSITORY_NAME: blog
         OVH_WEBSITE_PUBLICDIR: www
+        OVH_WEBSITE_ENTRYPOINT: www
+        OVH_WEBSITE_DOCUMENTROOT: www
+        REPOSITORY_NAME: blog
         REPOSITORY_URL: https://github.com/agustingv/blog.git
