@@ -11,6 +11,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl jq sshpass openssh-client
+      - name: Composer install
+        uses: "shivammathur/setup-php@v2"
+          with:
+            php-version: "latest"
 
       - name: WakeUp website
         env:
@@ -25,14 +29,6 @@ jobs:
             OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'rm -rf www && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' www'
 
-      - name: Composer install
-        uses: "shivammathur/setup-php@v2"
-          with:
-            php-version: "latest"
-        uses: "ramsey/composer-install@v2"
-          with:
-            working-directory: "www"
-            
       - name: WakeUp website
         env:
             OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}
