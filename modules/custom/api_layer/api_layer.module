@@ -20,6 +20,7 @@ function api_layer_cron() {
             if (!empty($resource)) {
                 foreach ($resource[$api['start']] as $item)
                 {
+
                     $hash = md5($item['title']);
                     $query = \Drupal::entityQuery('node')
                     ->condition('type', 'external')
@@ -42,10 +43,37 @@ function api_layer_cron() {
 }
 
 
-function api_layer_mediastack_to_entity(array $item) : void
+function api_layer_source_blacklist(string $source) : bool
 {
+    $blacklist = [
+        'Yahoo Entertainment',
+        'Compradiccion.com',
+        'Revistagq.com',
+        'Pagina/12',
+        'La Nacion',
+        'Terra.com.br',
+        'Cnnbrasil.com.br',
+        'Tudocelular.com'
+    ];
+
+    if (in_array($source, $blacklist)) 
+    {
+        return true;
+    }
+
+    return false;
+}
+
+function api_layer_mediastack_to_entity(array $item) : bool
+{
+    if (api_layer_source_blacklist($item['source']))
+    {
+        return false;
+    }
+
     if (!empty($item['image']) && $image = file_get_contents($item['image']))
     {
+
         $name = basename($item['image']);
         $directory = 'public://external/image';
         $destination = $directory.'/'.$name; 
@@ -74,10 +102,16 @@ function api_layer_mediastack_to_entity(array $item) : void
         $node->setOwnerId(3);
         $node->save();
     }
+    return true;
 }
 
-function api_layer_newsapi_to_entity(array $item) : void
+function api_layer_newsapi_to_entity(array $item) : bool
 {
+    if (api_layer_source_blacklist($item['source']['name']))
+    {
+        return false;
+    }
+
     if (!empty($item['urlToImage']) && $image = file_get_contents($item['urlToImage']))
     {
         $name = basename($item['urlToImage']);
@@ -107,4 +141,5 @@ function api_layer_newsapi_to_entity(array $item) : void
         $node->setOwnerId(3);
         $node->save();   
     }
+    return true;
 }
