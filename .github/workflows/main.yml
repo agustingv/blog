@@ -11,10 +11,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl jq sshpass openssh-client
+
       - name: Composer install
         uses: "shivammathur/setup-php@v2"
-          with:
-            php-version: "latest"
+        with:
+          php-version: "latest"
 
       - name: WakeUp website
         env:
