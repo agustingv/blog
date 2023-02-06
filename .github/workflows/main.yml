@@ -1,18 +1,31 @@
-on: [push]
+ name: Deploy to OVHcloud Power
+  on:
+    push:
+      branches: [ main ]
+    workflow_dispatch:
+  jobs:
+    deploy:    
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Install prerequisites
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y curl jq sshpass openssh-client
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    name: deaploy main on ovh
-    steps:
-    - name: Deploy to OVH hosting
-      uses: pitscher/ovh-deploy-hosting-action@v1
-      env:
-        OVH_HOSTING_USER: ${{ secrets.OVH_HOSTING_USER }}
-        OVH_HOSTING_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
-        OVH_HOSTING_DOMAIN: ssh.cluster031.hosting.ovh.net
-        OVH_WEBSITE_PUBLICDIR: www
-        OVH_WEBSITE_ENTRYPOINT: www
-        OVH_WEBSITE_DOCUMENTROOT: www
-        REPOSITORY_NAME: blog
-        REPOSITORY_URL: https://github.com/agustingv/blog.git
+        - name: WakeUp website
+          env:
+              OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}
+          run: curl --silent --insecure --location --write-out "%{http_code}" -o /dev/null ${OVH_WEBSITE_URL}
+
+        - name: Clone over SSH
+          env:
+              OVH_SSH_HOST: ${{ secrets.OVH_SSH_HOST }}
+              OVH_SSH_PORT: ${{ secrets.OVH_SSH_PORT }}
+              OVH_SSH_USERNAME: ${{ secrets.OVH_HOSTING_USER }}
+              OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
+          run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'rm -rf ${HOME} && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' ${HOME}'
+
+        - name: WakeUp website
+          env:
+              OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}
+          run: curl --silent --fail --insecure --location --write-out "%{http_code}" -o /dev/null ${OVH_WEBSITE_URL}
