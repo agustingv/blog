@@ -32,7 +32,7 @@ jobs:
       - name: Composer exec
         uses: "ramsey/composer-install@v2"
         with:
-          working-directory: "www"
+          working-directory: $(pwd)"/www"
 
       - name: WakeUp website
         env:
