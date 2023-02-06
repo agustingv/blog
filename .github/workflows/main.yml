@@ -3,7 +3,7 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy my nice code
+    name: deaploy main on ovh
     steps:
     - name: Deploy to OVH hosting
       uses: pitscher/ovh-deploy-hosting-action@v1
