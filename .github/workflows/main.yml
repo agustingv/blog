@@ -29,10 +29,10 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "latest"
-      - name: Composer exec
         uses: "ramsey/composer-install@v2"
           with:
             working-directory: "www"
+            
       - name: WakeUp website
         env:
             OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}
