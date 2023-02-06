@@ -26,11 +26,21 @@ jobs:
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'rm -rf www && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' www'
 
       - name: Composer install
+        env:
+            OVH_SSH_HOST: ${{ secrets.OVH_SSH_HOST }}
+            OVH_SSH_PORT: ${{ secrets.OVH_SSH_PORT }}
+            OVH_SSH_USERNAME: ${{ secrets.OVH_HOSTING_USER }}
+            OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}      
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'php ./bin/composer install -d www'
 
       - name: Create sym links
+        env:
+            OVH_SSH_HOST: ${{ secrets.OVH_SSH_HOST }}
+            OVH_SSH_PORT: ${{ secrets.OVH_SSH_PORT }}
+            OVH_SSH_USERNAME: ${{ secrets.OVH_HOSTING_USER }}
+            OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}      
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'ln -s ./shared/es.gelr/public ./www/sites/default/files'
-        
+
       - name: WakeUp website
         env:
             OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}
