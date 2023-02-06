@@ -862,3 +862,8 @@ body.maintenance-page{
   background-color: #c7940a;
   border-color: #c7940a;
 }
+
+pre .hljs {
+  border-radius: 8px;
+  border: 1px solid black;
+}
