@@ -23,19 +23,19 @@ jobs:
             OVH_SSH_PORT: ${{ secrets.OVH_SSH_PORT }}
             OVH_SSH_USERNAME: ${{ secrets.OVH_HOSTING_USER }}
             OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
-            OVH_PROJECT_DIR: www
-        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'rm -rf ${OVH_PROJECT_DIR} && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' $OVH_PROJECT_DIR'
+            OVH_PROJECT_DIR: ${{ secrets.OVH_PROJECT_DIR }}
+        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'rm -rf ${OVH_PROJECT_DIR} && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' ${OVH_PROJECT_DIR}'
 
       - name: Composer install
         env: 
-            OVH_PROJECT_DIR: www
-        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'php ./bin/composer install -d $OVH_PROJECT_DIR'
+            OVH_PROJECT_DIR: ${{ secrets.OVH_PROJECT_DIR }}
+        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'php ./bin/composer install -d ${OVH_PROJECT_DIR}'
 
       - name: Create sym links
         env:
-            OVH_SHARE_DIR: ./shared/es.gelr/public
-            OVH_DEST_DIR: ./www/sites/default/files
-        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'ln -s $OVH_SHARE_DIR $OVH_DEST_DIR'
+            OVH_SHARE_DIR: ${{ secrets.OVH_SHARE_DIR }}
+            OVH_DEST_DIR: ${{ secrets.OVH_DEST_DIR }}
+        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'ln -s ${OVH_SHARE_DIR} ${OVH_DEST_DIR}'
 
       - name: WakeUp website
         env:
