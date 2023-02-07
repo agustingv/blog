@@ -9,3 +9,5 @@ global-styling:
       https://fonts.googleapis.com/css?family=Arvo:400,700: { external: true }
   js:
     https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9785748532076077: { external: true }
+    js/highlight.min.js: {}
+    js/inithighlgt.js: {}
