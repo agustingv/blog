@@ -12,6 +12,7 @@ jobs:
         OVH_SSH_USERNAME: ${{ secrets.OVH_HOSTING_USER }}
         OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
         OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}        
+        OVH_DOCROOT: www
     steps:
       - name: Install prerequisites
         run: |
@@ -22,7 +23,7 @@ jobs:
         run: curl --silent --insecure --location --write-out "%{http_code}" -o /dev/null ${OVH_WEBSITE_URL}
 
       - name: Clone over SSH
-        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'chmod -R 777 www/sites/ && rm -rf www && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' www'
+        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'chmod -R 777 www/sites/ && rm -rf  ${OVH_DOCROOT} && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' ${OVH_DOCROOT}'
 
       - name: Composer install
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'php ./bin/composer install -d www'
@@ -31,7 +32,7 @@ jobs:
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'cd www/sites/gelr.es && ln -s ../../../shared/gelr.es/files files'
 
       - name: Rebuild drupal
-        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'cd www && vendor/bin/drush rebuild'
+        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'cd www/sites/gelr.es && ../../vendor/bin/drush rebuild'
 
       - name: WakeUp website
         run: curl --silent --fail --insecure --location --write-out "%{http_code}" -o /dev/null ${OVH_WEBSITE_URL}
