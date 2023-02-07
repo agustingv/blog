@@ -506,7 +506,7 @@ $settings['reverse_proxy'] = TRUE;
  * must exist and be writable by Drupal. This directory must be relative to
  * the Drupal installation directory and be accessible over the web.
  */
-$settings['file_public_path'] = 'sites/default/files';
+# $settings['file_public_path'] = 'sites/gelr.es/files';
 
 /**
  * Additional public file schemes:
@@ -833,4 +833,4 @@ $databases['default']['default'] = array (
     'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
   ],
 );
-$settings['config_sync_directory'] = 'sites/default/files/sync';
+$settings['config_sync_directory'] = 'sites/gelr.es/files/sync';
