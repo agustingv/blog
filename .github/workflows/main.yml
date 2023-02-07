@@ -12,7 +12,6 @@ jobs:
         OVH_SSH_USERNAME: ${{ secrets.OVH_HOSTING_USER }}
         OVH_SSH_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
         OVH_WEBSITE_URL: ${{ secrets.OVH_WEBSITE_URL }}        
-        OVH_DOCROOT: www
     steps:
       - name: Install prerequisites
         run: |
@@ -23,7 +22,7 @@ jobs:
         run: curl --silent --insecure --location --write-out "%{http_code}" -o /dev/null ${OVH_WEBSITE_URL}
 
       - name: Clone over SSH
-        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'chmod -R 777 www/sites/ && rm -rf  ${OVH_DOCROOT} && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' ${OVH_DOCROOT}'
+        run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'chmod -R 777 www/sites/ && rm -rf  www && git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git --single-branch --branch '${GITHUB_REF##*/}' www'
 
       - name: Composer install
         run: sshpass -p ${OVH_SSH_PASSWORD} ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oLogLevel=quiet ${OVH_SSH_USERNAME}@${OVH_SSH_HOST} -p ${OVH_SSH_PORT} -- 'php ./bin/composer install -d www'
