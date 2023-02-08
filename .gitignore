@@ -2,3 +2,4 @@ vendor/
 sites/default/files/
 sites/default/settings.php
 themes/contrib/
+modules/contrib
