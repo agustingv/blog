@@ -820,11 +820,11 @@ if (file_exists($app_root . '/' . $site_path . '/settings.prod.php')) {
 }
 
 $databases['default']['default'] = array (
-  'database' => getenv('DRUPAL_DB_DB'),
-  'username' => [[DRUPAL_USER]],
-  'password' => getenv('DRUPAL_DB_PASS'),
+  'database' => '[[DRUPAL_DB]]',
+  'username' => '[[DRUPAL_USER]]',
+  'password' => '[[DRUPAL_PASS]]',
   'prefix' => '',
-  'host' => getenv('DRUPAL_DB_HOST'),
+  'host' => '[[DRUPAL_HOST]]',
   'port' => '3306',
   'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
   'driver' => 'mysql',

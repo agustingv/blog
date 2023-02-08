@@ -497,7 +497,7 @@ $settings['reverse_proxy'] = TRUE;
  * security by serving user-uploaded files from a different domain or subdomain
  * pointing to the same server. Do not include a trailing slash.
  */
-# $settings['file_public_base_url'] = 'http://downloads.example.com/files';
+#$settings['file_public_base_url'] = 'http://localhost/files';
 
 /**
  * Public file path:
@@ -506,7 +506,7 @@ $settings['reverse_proxy'] = TRUE;
  * must exist and be writable by Drupal. This directory must be relative to
  * the Drupal installation directory and be accessible over the web.
  */
-$settings['file_public_path'] = 'sites/default/files';
+#$settings['file_public_path'] = 'sites/default/files';
 
 /**
  * Additional public file schemes:
@@ -836,4 +836,4 @@ $databases['default']['default'] = array (
     'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
   ],
 );
-$settings['config_sync_directory'] = 'sites/default/files/config_mjO-3G_qz6n3hobZtMfKJ1ojkP4NfyrowALSmVZUTff1tIVM_R01ydOVjVfUmWqtaF3_OTY9XQ/sync';
+$settings['config_sync_directory'] = 'sites/localhost/files/sync';
