@@ -2,3 +2,4 @@ vendor/
 themes/contrib/
 modules/contrib/
 sites/default/
+sites/localhost/
