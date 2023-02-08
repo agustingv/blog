@@ -264,7 +264,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'Yh7qKpkmF1KwKCnF4rg_pPFeRF_nZunDLZMhropFO1NQMPyzkOkqfSoTFVBwzFkZzySZIxFBrQ';
+$settings['hash_salt'] = '[[DRUPAL_HSALT]]';
 
 /**
  * Deployment identifier.
