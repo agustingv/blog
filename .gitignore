@@ -1,5 +1,4 @@
 vendor/
-sites/default/files/
-sites/default/settings.php
 themes/contrib/
-modules/contrib
+modules/contrib/
+sites/default/
