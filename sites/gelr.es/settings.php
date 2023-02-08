@@ -821,7 +821,7 @@ if (file_exists($app_root . '/' . $site_path . '/settings.prod.php')) {
 
 $databases['default']['default'] = array (
   'database' => getenv('DRUPAL_DB_DB'),
-  'username' => getenv('DRUPAL_DB_USER'),
+  'username' => [[DRUPAL_USER]],
   'password' => getenv('DRUPAL_DB_PASS'),
   'prefix' => '',
   'host' => getenv('DRUPAL_DB_HOST'),
