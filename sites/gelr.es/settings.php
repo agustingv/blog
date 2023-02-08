@@ -820,11 +820,11 @@ if (file_exists($app_root . '/' . $site_path . '/settings.prod.php')) {
 }
 
 $databases['default']['default'] = array (
-  'database' => 'gelresrdrupal',
-  'username' => 'gelresrdrupal',
-  'password' => 'Drupal445',
+  'database' => getenv('DRUPAL_DB_DB'),
+  'username' => getenv('DRUPAL_DB_USER'),
+  'password' => getenv('DRUPAL_DB_PASS'),
   'prefix' => '',
-  'host' => 'gelresrdrupal.mysql.db',
+  'host' => getenv('DRUPAL_DB_HOST'),
   'port' => '3306',
   'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
   'driver' => 'mysql',
