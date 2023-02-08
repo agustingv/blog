@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-.node--view-mode-listado-a .node__content .field--type-image {
+.node--view-mode-listado-a .node__content .field--name-field-image {
     float:right;
     margin-right: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -36,6 +36,20 @@
 
 .node--view-mode-listado-a {
   margin-bottom: 20px;
+}
+
+.node--view-mode-listado-c h4 {
+  font-family: Lato;
+}
+
+.node--view-mode-listado-c a {
+  text-decoration: none;
+  color: darkslategray;
+}
+
+.node--view-mode-listado-c .field--name-body {
+  font-size: 12pt;
+  font-style: italic;
 }
 
 .region-content {
@@ -78,41 +92,6 @@ article blockquote::after {
     border-bottom: 3px solid #bf0024;
     height: 3px;
     width: 200px;
-}
-
-
-.profile {
-    background: #fff;
-    border: 1px solid #D3D3D3;
-    padding: 3px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0px;
-    float:left;
-}
-.profile .field--type-image a {
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.profile .field--type-image img {
-    display: block;
-    height: 100%;
-    margin: auto;
-    top: -100%;
-    right: -100%;
-    bottom: -100%;
-    left: -100%;
-}
-
-.profile {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 10px;
 }
 
 .profile {
@@ -429,11 +408,8 @@ main {
   margin-bottom: 10px;
 }
 
-.node--view-mode-listado-a .node__content .field--type-image {
-  float:right;
-  margin-right: 10px;
+.node--view-mode-listado-a .node__content .field--name-user-picture {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  margin-left: 5px;
 }
 
 .node--view-mode-listado-a .node__content {
@@ -507,23 +483,19 @@ article blockquote::after {
 .profile {
   background: #fff;
   border: 1px solid #D3D3D3;
-  padding: 3px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  border-radius: 15%;
   overflow: hidden;
   margin: 0px;
   float:left;
 }
-.profile .field--type-image a {
-  height: 100%;
-  border-radius: 50%;
+.profile .field--name-user-picture a {
   overflow: hidden;
 }
-.profile .field--type-image img {
+.profile .field--name-user-picture img {
   display: block;
-  height: 100%;
   margin: auto;
+  height: 100%;
+  width: 100%;
   top: -100%;
   right: -100%;
   bottom: -100%;
@@ -531,10 +503,8 @@ article blockquote::after {
 }
 
 .profile {
-  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin-right: 10px;
 }
 
