@@ -19,14 +19,27 @@ class HttpClient
         array $options = []) : array
     {
         $resource = "";
+        $cacheData = null;
+        $cacheExpire = time() + (60 * 60 * 12);
         try {
 
-            $response = $this->http_client->get($url);
+            $cid = md5($url);
+            $cacheData = $this->cacheBackend->get($cid);
+            if (isset($cacheData->data))
+            {
+                return Json::decode($cacheData->data);
+            }
 
+            $options = [
+                'connect_timeout' => 2,
+                'timeout' => 2
+            ];
+            $response = $this->http_client->get($url, $options);
 
             if ($response->getStatuscode() == 200)
             {
                 $resource = $response->getBody()->getContents();
+                $this->cacheBackend->set($cid, $resource, $cacheExpire);
                 $resource = Json::decode($resource);
             }
             else 
