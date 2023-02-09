@@ -12,7 +12,7 @@
     <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
     <ul class="breadcrumb">
     {% for item in breadcrumb %}
-      <li class="breadcrumb-item">
+      <li class="breadcrumb-item-bs5">
         {% if item.url %}
           <a href="{{ item.url }}">{{ item.text }}</a>
         {% else %}

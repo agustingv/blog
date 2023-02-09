@@ -130,7 +130,6 @@ article footer {
 
 .node--view-mode-header {
     padding-left: 8px;
-    border-bottom: 1px solid lightgrey;
     margin-bottom: 10px;
 }
 
@@ -251,12 +250,11 @@ ul.breadcrumb li a:hover {
   text-decoration: underline;
 }
 
-
-
 .footer {
   background-color: #121315;
   color: #a7a7a7;
   font-size: 16px;
+  padding-bottom: 0;
 }
 .footer * {
   font-family: "Poppins", sans-serif;
@@ -536,18 +534,6 @@ article footer {
   font-size: 1.4em;
 }
 
-.region-content-header .field--name-body {
-  font-size: 16pt;
-  font-style: italic;
-  padding-bottom: 10px;
-}
-
-.node--view-mode-header {
-  padding-left: 8px;
-  border-bottom: 1px solid lightgrey;
-  margin-bottom: 10px;
-}
-
 .tags {
   list-style: none;
   margin: 0;
@@ -626,11 +612,6 @@ article .node__submitted span {
   margin-left: 5px;
 }
 
-article .field--name-body {
-  font-family: Lato;
-  font-size: 14pt;
-}
-
 article .node__content {
   clear:both;
 }
@@ -646,14 +627,13 @@ ul.breadcrumb li {
   font-size: 18px;
 }
 
-/* Add a slash symbol (/) before/behind each list item */
 ul.breadcrumb li+li:before {
   padding: 8px;
-  color: black;
+  color: darkgrey;
   content: "/\00a0";
+  padding-right: 0;
 }
 
-/* Add a color to all links inside the list */
 ul.breadcrumb li a {
   color: darkgrey;
   text-decoration: none;
@@ -665,13 +645,6 @@ ul.breadcrumb li a:hover {
   text-decoration: underline;
 }
 
-
-
-.footer {
-  background-color: #121315;
-  color: #a7a7a7;
-  font-size: 16px;
-}
 .footer * {
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
@@ -839,8 +812,16 @@ body.maintenance-page{
   background-color: #c7940a;
   border-color: #c7940a;
 }
+.btn-primary:hover {
+  background-color: #c7940a;
+  border-color: #c7940a;
+}
 
 pre .hljs {
   border-radius: 8px;
   border: 1px solid black;
+}
+
+.contact-form {
+  font-family: Lato;
 }
