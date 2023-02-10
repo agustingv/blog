@@ -4,3 +4,9 @@
  * @file
  * B5 subtheme theme file.
  */
+
+
+ function b5subtheme_theme_suggestions_user_alter(&$suggestions, $variables, $hook) {
+    $mode = $variables['elements']['#view_mode'];
+    $suggestions[] = 'user__' . $mode;
+ }

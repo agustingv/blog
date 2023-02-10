@@ -20,6 +20,20 @@
   margin-left: 5px;
 }
 
+.node--view-mode-listado-d .node__content .field--name-field-image {
+  float:right;
+  margin-right: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-left: 5px;
+}
+
+.node--view-mode-listado-d .node__content .field--name-field-extenal-image {
+float:right;
+margin-right: 10px;
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+margin-left: 5px;
+}
+
 .node--view-mode-listado-a .node__content {
     clear:both;
 }
@@ -43,6 +57,32 @@
 
 .node--view-mode-listado-a {
   margin-bottom: 20px;
+}
+
+
+.node--view-mode-listado-d .node__content {
+  clear:both;
+}
+
+.node--view-mode-listado-d .field--name-title {
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.node--view-mode-listado-d a{
+  text-decoration: none;
+  color: darkslategray;
+}
+
+.node--view-mode-listado-d .field--name-field-source {
+font-family: Lato;
+font-style: italic;
+font-weight: bold;
+}
+
+.node--view-mode-listado-d {
+margin-bottom: 20px;
 }
 
 .node--view-mode-listado-c h4 {
@@ -848,4 +888,8 @@ pre .hljs {
 @keyframes type{
   from{box-shadow: inset -3px 0px 0px #888;}
   to{box-shadow: inset -3px 0px 0px transparent;}
+}
+
+.user-profile {
+  text-align: center;
 }
