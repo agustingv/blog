@@ -1,0 +1,18 @@
+<?php
+
+use Kreait\Firebase\Factory;
+use Drupal\Component\Serialization\Json;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Google\Cloud\Firestore\FirestoreClient;
+
+function firebasec_test()
+{
+    $fb = \Drupal::service('drupal_firebase.drupal.firestore');
+    $db = $fb->database();
+    $documents = $db->collection('articles');
+}
+
+function firebasec_node_load(array $entities)
+{
+    firebasec_test();
+}

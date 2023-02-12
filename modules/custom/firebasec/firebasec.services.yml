@@ -1,0 +1,13 @@
+parameters:
+  firebase.config:
+    projects:
+        drupal:
+            credentials: 'modules/custom/firebasec/drupal-c2de7-51701c3a60eb.json'
+            default: true
+            public: true
+            database_uri: 'https://drupal-c2de7.firebaseapp.com'
+            default_dynamic_links_domain: 'https://drupal-c2de7.page.link'
+            verifier_cache: null # Example: cache.app
+            auth_token_cache: null # Example: cache.app
+            http_request_logger:  null # Example: monolog.logger.firebase
+            http_request_debug_logger: null # Example: monolog.logger.firebase_debug

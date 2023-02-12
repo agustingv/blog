@@ -1,0 +1,4 @@
+name : 'Firebase'
+description : 'Firebase api integration'
+core_version_requirement: ^9.3 || ^10
+type: module

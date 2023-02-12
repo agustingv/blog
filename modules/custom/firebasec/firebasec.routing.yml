@@ -1,0 +1,7 @@
+firebasec.settings:
+  path: '/admin/config/firebase/settings'
+  defaults:
+    _form: '\Drupal\firebasec\Form\FirebaseConfigForm'
+    _title: 'Firebase'
+  requirements:
+    _permission: 'administer site configuration'

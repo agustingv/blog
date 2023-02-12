@@ -1,0 +1,12 @@
+{
+    "name": "drupal/firebasec",
+    "type": "drupal-custom-module",
+    "description": "Firebase Drupal binding",
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "require": {
+        "kreait/firebase-php": "7.0",
+        "google/cloud-firestore": "^1.27",
+        "symfony/cache": "6.2.5"
+    }
+}
