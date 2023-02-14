@@ -57,6 +57,9 @@
             "file-mapping": {
                 "[web-root]/robots.txt": {
                     "append": "assets/robots-additions.txt"
+                },
+                "[web-root]/.htaccess": {
+                    "append": "assets/htaccess-additions.txt"
                 }
             }
         },
