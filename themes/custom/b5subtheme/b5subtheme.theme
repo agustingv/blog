@@ -10,3 +10,17 @@
     $mode = $variables['elements']['#view_mode'];
     $suggestions[] = 'user__' . $mode;
  }
+
+
+/**
+ * Remove meta Generator default
+ */
+function b5subtheme_page_attachments_alter(array &$attachments) {
+   foreach($attachments['#attached']['html_head'] as $key => $attachment){
+       if (isset($attachment) && is_array($attachment) && count($attachment)){
+           if (in_array('system_meta_generator', $attachment)){
+            unset($attachments['#attached']['html_head'][$key]);
+           }
+       }
+   }
+}
