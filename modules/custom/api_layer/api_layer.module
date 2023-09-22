@@ -53,7 +53,8 @@ function api_layer_source_blacklist(string $source) : bool
         'La Nacion',
         'Terra.com.br',
         'Cnnbrasil.com.br',
-        'Tudocelular.com'
+	'Tudocelular.com',
+	'Ig.com.br'
     ];
 
     if (in_array($source, $blacklist)) 
