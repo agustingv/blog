@@ -16,6 +16,7 @@
     ],
     "require": {
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/better_social_sharing_buttons": "^4.0",
         "drupal/bootstrap5": "^3.0",
         "drupal/core-composer-scaffold": "^10.0",
@@ -25,7 +26,9 @@
         "drupal/devel": "^5.1",
         "drupal/eu_cookie_compliance": "^1.24",
         "drupal/google_analytics": "^4.0",
+        "drupal/metatag": "^1.22",
         "drupal/pathauto": "^1.11",
+        "drupal/simple_sitemap": "^4.1",
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/url_embed": "^2.0@alpha",
         "drush/drush": "^11.4"
@@ -42,7 +45,8 @@
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
             "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cweagans/composer-patches": true
         },
         "sort-packages": true
     },
@@ -50,6 +54,11 @@
         "drupal-scaffold": {
             "locations": {
                 "web-root": "./"
+            },
+            "file-mapping": {
+                "[web-root]/robots.txt": {
+                    "append": "assets/robots-additions.txt"
+                }
             }
         },
         "installer-paths": {
