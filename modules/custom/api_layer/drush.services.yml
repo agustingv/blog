@@ -1,0 +1,5 @@
+services:
+  api_layer.commands:
+    class: \Drupal\api_layer\Commands\ExternalApiLayerCommands
+    tags:
+      - { name: drush.command }
