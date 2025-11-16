@@ -40,6 +40,8 @@ function api_layer_cron() {
 
         }
     }
+
+    api_layer_delete_old_news();
 }
 
 
@@ -143,4 +145,21 @@ function api_layer_newsapi_to_entity(array $item) : bool
         $node->save();   
     }
     return true;
+}
+
+
+function api_layer_delete_old_news() {
+    $threshold = \Drupal::time()->getRequestTime() - (7 * 24 * 60 * 60); // 7 days ago
+
+    $query = \Drupal::entityQuery('node')
+        ->condition('type', 'external')
+        ->condition('created', $threshold, '<')
+        ->accessCheck(TRUE);
+    $nids = $query->execute();
+
+    if (!empty($nids)) {
+        $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
+        $nodes = $storage_handler->loadMultiple($nids);
+        $storage_handler->delete($nodes);
+    }
 }
