@@ -18,20 +18,28 @@
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
         "drupal/better_social_sharing_buttons": "^4.0",
-        "drupal/bootstrap5": "^3.0",
-        "drupal/core-composer-scaffold": "^10.0",
-        "drupal/core-project-message": "^10.0",
-        "drupal/core-recommended": "^10.0",
-        "drupal/core-vendor-hardening": "^10.0",
-        "drupal/devel": "^5.1",
-        "drupal/eu_cookie_compliance": "^1.24",
+        "drupal/bootstrap5": "^4.0",
+        "drupal/core": "^11",
+        "drupal/core-composer-scaffold": "^11.2",
+        "drupal/core-project-message": "^11.2",
+        "drupal/core-recommended": "^11",
+        "drupal/core-vendor-hardening": "^11.2",
+        "drupal/ctools": "^4.1",
+        "drupal/devel": "^5.2",
+        "drupal/embed": "^1.9",
+        "drupal/eu_cookie_compliance": "^1.29",
         "drupal/google_analytics": "^4.0",
-        "drupal/metatag": "^1.22",
-        "drupal/pathauto": "^1.11",
+        "drupal/metatag": "^2.1",
+        "drupal/pathauto": "^1.13",
         "drupal/simple_sitemap": "^4.1",
+        "drupal/statistics": "^1.0",
+        "drupal/token": "^1.16",
+        "drupal/tour": "^2.0",
         "drupal/ultimate_cron": "^2.0@alpha",
-        "drupal/url_embed": "^2.0@alpha",
-        "drush/drush": "^11.4"
+        "drupal/url_embed": "^3.0",
+        "drupal/vani": "^11.0",
+        "drush/drush": "^13.6",
+        "symfony/yaml": "^7"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -48,8 +56,12 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "cweagans/composer-patches": true
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "audit": {
+            "block-insecure": false
+        }
     },
+
     "extra": {
         "drupal-scaffold": {
             "locations": {

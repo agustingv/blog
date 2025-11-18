@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\system\Functional\Ajax;
 
 use Drupal\ajax_test\Controller\AjaxTestController;
@@ -20,9 +22,7 @@ class OffCanvasDialogTest extends BrowserTestBase {
   protected $defaultTheme = 'stark';
 
   /**
-   * Modules to enable.
-   *
-   * @var array
+   * {@inheritdoc}
    */
   protected static $modules = ['ajax_test'];
 
@@ -31,7 +31,7 @@ class OffCanvasDialogTest extends BrowserTestBase {
    *
    * @dataProvider dialogPosition
    */
-  public function testDialog($position) {
+  public function testDialog($position): void {
     // Ensure the elements render without notices or exceptions.
     $this->drupalGet('ajax-test/dialog');
 
@@ -42,9 +42,13 @@ class OffCanvasDialogTest extends BrowserTestBase {
       'command' => 'openDialog',
       'selector' => '#drupal-off-canvas',
       'settings' => NULL,
-      'data' => $dialog_contents,
+      'data' => (string) $dialog_contents,
       'dialogOptions' =>
         [
+          'classes' => [
+            'ui-dialog' => 'ui-dialog-off-canvas ui-dialog-position-' . ($position ?: 'side'),
+            'ui-dialog-content' => 'drupal-off-canvas-reset',
+          ],
           'title' => 'AJAX Dialog & contents',
           'modal' => FALSE,
           'autoResize' => FALSE,
@@ -52,9 +56,6 @@ class OffCanvasDialogTest extends BrowserTestBase {
           'draggable' => FALSE,
           'drupalAutoButtons' => FALSE,
           'drupalOffCanvasPosition' => $position ?: 'side',
-          'buttons' => [],
-          'dialogClass' => 'ui-dialog-off-canvas ui-dialog-position-' . ($position ?: 'side'),
-          'classes' => ['ui-dialog-content' => 'drupal-off-canvas-reset'],
           'width' => 300,
         ],
       'effect' => 'fade',
@@ -65,13 +66,15 @@ class OffCanvasDialogTest extends BrowserTestBase {
     $wrapper_format = $position && ($position !== 'side') ? 'drupal_dialog.off_canvas_' . $position : 'drupal_dialog.off_canvas';
     $ajax_result = $this->drupalGet('ajax-test/dialog-contents', ['query' => [MainContentViewSubscriber::WRAPPER_FORMAT => $wrapper_format]]);
     $ajax_result = Json::decode($ajax_result);
-    $this->assertEquals($off_canvas_expected_response, $ajax_result[4], 'off-canvas dialog JSON response matches.');
+
+    $this->assertSame($off_canvas_expected_response, $ajax_result[4], 'off-canvas dialog JSON response matches.');
   }
 
   /**
    * The data provider for potential dialog positions.
    *
    * @return array
+   *   An array of dialog positions.
    */
   public static function dialogPosition() {
     return [

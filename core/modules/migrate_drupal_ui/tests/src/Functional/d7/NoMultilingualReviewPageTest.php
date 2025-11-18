@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\migrate_drupal_ui\Functional\d7;
 
 use Drupal\Tests\migrate_drupal_ui\Functional\NoMultilingualReviewPageTestBase;
 
-// cspell:ignore Filefield Multiupload Imagefield
+// cspell:ignore Filefield Multiupload Imagefield rulesets
 
 /**
  * Tests Drupal 7 upgrade without translations.
@@ -19,15 +21,12 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
    * {@inheritdoc}
    */
   protected static $modules = [
-    'book',
     'config_translation',
     'content_translation',
     'datetime_range',
     'file',
-    'forum',
     'language',
     'migrate_drupal_ui',
-    'statistics',
     'telephone',
   ];
 
@@ -42,18 +41,17 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getSourceBasePath() {
+  protected function getSourceBasePath(): string {
     return __DIR__ . '/files';
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getAvailablePaths() {
+  protected function getAvailablePaths(): array {
     return [
       'Block',
       'Block languages',
-      'Book',
       'Bulk Export',
       'Chaos Tools (CTools) AJAX Example',
       'Chaos tools',
@@ -82,7 +80,6 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'Field SQL storage',
       'File',
       'Filter',
-      'Forum',
       'Image',
       'Internationalization',
       'Link',
@@ -106,7 +103,6 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'Search',
       'Search embedded form',
       'Shortcut',
-      'Statistics',
       'String translation',
       'Stylizer',
       'Synchronize translations',
@@ -143,22 +139,24 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function getIncompletePaths() {
+  protected function getIncompletePaths(): array {
     return [];
   }
 
   /**
    * {@inheritdoc}
    */
-  protected function getMissingPaths() {
+  protected function getMissingPaths(): array {
     return [
       'Aggregator',
+      'Book',
       'Breakpoints',
       'Color',
       'Contact translation',
       'Entity Translation Menu',
       'Entity Translation Upgrade',
       'FlexSlider Picture',
+      'Forum',
       'Multilingual content',
       'Multilingual forum',
       'Multilingual select',
@@ -167,6 +165,7 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       'RDF',
       'References',
       'References UUID',
+      'Statistics',
       'Translation redirect',
       'Translation sets',
       'User mail translation',
@@ -180,7 +179,6 @@ class NoMultilingualReviewPageTest extends NoMultilingualReviewPageTestBase {
       // These modules are in the missing path list because they are installed
       // on the source site but they are not installed on the destination site.
       'Syslog',
-      // @todo Remove tracker in https://www.drupal.org/project/drupal/issues/3261452
       'Tracker',
       'Update manager',
     ];
