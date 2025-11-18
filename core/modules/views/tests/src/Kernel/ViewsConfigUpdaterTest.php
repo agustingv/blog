@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\views\Kernel;
 
 use Drupal\Core\Config\FileStorage;
@@ -13,13 +15,21 @@ use Drupal\Core\Config\FileStorage;
 class ViewsConfigUpdaterTest extends ViewsKernelTestBase {
 
   /**
-   * Dummy test to keep this test file with the loadTestView method.
-   *
-   * @see https://www.drupal.org/project/drupal/issues/3261245
-   * @todo Remove the dummyTest function when this class contains a real test.
+   * {@inheritdoc}
    */
-  public function testPass() {
-    $this->assertTrue(TRUE);
+  protected static $modules = [
+    'views_config_entity_test',
+    'entity_test',
+    'field',
+  ];
+
+  /**
+   * Tests ViewsConfigUpdater.
+   */
+  public function testViewsConfigUpdater(): void {
+    // ViewsConfigUpdater currently contains no actual configuration update
+    // logic. Replace this method with a real test when it does.
+    $this->markTestSkipped();
   }
 
   /**

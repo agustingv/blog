@@ -4,3 +4,5 @@ modules/contrib/
 sites/default/
 sites/localhost/
 sites/gelr.es/
+files
+robots.txt

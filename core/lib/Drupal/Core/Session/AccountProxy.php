@@ -99,6 +99,22 @@ class AccountProxy implements AccountProxyInterface {
   }
 
   /**
+   * Whether a user has a certain role.
+   *
+   * @param string $rid
+   *   The role ID to check.
+   *
+   * @return bool
+   *   Returns TRUE if the user has the role, otherwise FALSE.
+   *
+   * @todo in Drupal 11, add method to Drupal\Core\Session\AccountInterface.
+   * @see https://www.drupal.org/node/3228209
+   */
+  public function hasRole(string $rid): bool {
+    return $this->getAccount()->hasRole($rid);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function hasPermission($permission) {
@@ -190,13 +206,13 @@ class AccountProxy implements AccountProxyInterface {
    * container into the AccountProxy. Thus it is necessary to retrieve the
    * entity type manager statically.
    *
-   * @see https://www.drupal.org/node/2430447
-   *
    * @param int $account_id
    *   The id of an account to load.
    *
    * @return \Drupal\Core\Session\AccountInterface|null
    *   An account or NULL if none is found.
+   *
+   * @see https://www.drupal.org/node/2430447
    */
   protected function loadUserEntity($account_id) {
     return \Drupal::entityTypeManager()->getStorage('user')->load($account_id);

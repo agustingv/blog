@@ -118,7 +118,7 @@ class KeyValueEntityStorage extends EntityStorageBase {
   /**
    * {@inheritdoc}
    */
-  public function doLoadMultiple(array $ids = NULL) {
+  public function doLoadMultiple(?array $ids = NULL) {
     if (empty($ids)) {
       $entities = $this->keyValueStore->getAll();
     }
@@ -126,20 +126,6 @@ class KeyValueEntityStorage extends EntityStorageBase {
       $entities = $this->keyValueStore->getMultiple($ids);
     }
     return $this->mapFromStorageRecords($entities);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function loadRevision($revision_id) {
-    return NULL;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function deleteRevision($revision_id) {
-    return NULL;
   }
 
   /**

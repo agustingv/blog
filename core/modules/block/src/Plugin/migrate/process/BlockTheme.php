@@ -2,37 +2,29 @@
 
 namespace Drupal\block\Plugin\migrate\process;
 
-use Drupal\migrate\Plugin\MigrationInterface;
+use Drupal\Core\Config\Config;
+use Drupal\migrate\Attribute\MigrateProcess;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
-use Drupal\Core\Config\Config;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * @MigrateProcessPlugin(
- *   id = "block_theme"
- * )
+ * Determines the theme to use for a block.
  */
+#[MigrateProcess('block_theme')]
 class BlockTheme extends ProcessPluginBase implements ContainerFactoryPluginInterface {
 
   /**
-   * Contains the configuration object factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
-   */
-  protected $configFactory;
-
-  /**
    * Contains the system.theme configuration object.
-   *
-   * @var \Drupal\Core\Config\Config
    */
-  protected $themeConfig;
+  protected Config $themeConfig;
 
   /**
    * List of themes available on the destination.
+   *
+   * @var string[]
    */
   protected array $themes;
 
@@ -45,15 +37,13 @@ class BlockTheme extends ProcessPluginBase implements ContainerFactoryPluginInte
    *   The plugin ID for the plugin instance.
    * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\migrate\Plugin\MigrationInterface $migration
-   *   The migration entity.
    * @param \Drupal\Core\Config\Config $theme_config
    *   The system.theme configuration factory object.
    * @param array $themes
    *   The list of themes available on the destination.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, Config $theme_config, array $themes) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $migration);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Config $theme_config, array $themes) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->themeConfig = $theme_config;
     $this->themes = $themes;
   }
@@ -61,12 +51,11 @@ class BlockTheme extends ProcessPluginBase implements ContainerFactoryPluginInte
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration = NULL) {
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $migration,
       $container->get('config.factory')->get('system.theme'),
       $container->get('theme_handler')->listInfo()
     );
